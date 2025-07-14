@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatapp</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Bouton thème sombre -->
+  <style>
+    #theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2em;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="theme-toggle">🌙</button>
+
+  <!-- Écran de connexion -->
+  <div id="login-screen" class="screen">
+    <div class="login-container">
+      <h1>Rejoindre le Chat</h1>
+      <form id="login-form">
+        <input 
+          type="text" 
+          id="username-input" 
+          placeholder="Entrez votre nom d'utilisateur" 
+          required 
+          maxlength="20"
+        >
+        <button type="submit">Rejoindre</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interface principale du chat -->
+  <div id="chat-screen" class="screen hidden">
+    <div class="chat-container">
+      <div class="chat-header">
+        <h1>Chatapp</h1>
+        <div class="user-info">
+          <span id="current-user"></span>
+          <button id="disconnect-btn">Déconnexion</button>
+        </div>
+      </div>
+
+      <div class="chat-content">
+        <!-- Liste des utilisateurs -->
+        <div class="sidebar">
+          <h3>Utilisateurs connectés</h3>
+          <ul id="users-list"></ul>
+        </div>
+
+        <!-- Zone principale du chat -->
+        <div class="chat-main">
+          <div id="messages-container" class="messages-container"></div>
+
+          <!-- Indicateur de frappe -->
+          <div id="typing-indicator" class="typing-indicator hidden">
+            <span id="typing-text"></span>
+          </div>
+
+          <!-- Formulaire message -->
+          <form id="message-form" class="message-form">
+            <input 
+              type="text" 
+              id="message-input" 
+              placeholder="Tapez votre message..." 
+              required 
+              maxlength="500"
+            >
+            <button type="button" id="emoji-btn">😊</button>
+            <button type="submit">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emoji picker -->
+  <script type="module">
+    import 'https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js';
+  </script>
+
+  <emoji-picker id="emoji-picker" style="position: absolute; bottom: 80px; right: 20px; display: none;"></emoji-picker>
+
+  <!-- Script JS -->
+  <script src="client.js"></script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+/* Reset & base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    height: 100vh;
+    overflow: hidden;
+    color: #333;
+}
+
+/* Écrans */
+.screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Écran de connexion */
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 300px;
+}
+
+.login-container h1 {
+    margin-bottom: 1.5rem;
+    color: #444;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.login-container input:focus {
+    border-color: #667eea;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container button:hover {
+    background: #5a6fd8;
+}
+
+/* Chat principal */
+.chat-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+/* En-tête */
+.chat-header {
+    background: #667eea;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#disconnect-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#disconnect-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Contenu */
+.chat-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #f1f3f5;
+    border-right: 1px solid #dee2e6;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+#users-list {
+    list-style: none;
+}
+
+#users-list li {
+    background: white;
+    padding: 0.6rem;
+    border-left: 3px solid #667eea;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* Zone principale */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Messages */
+.messages-container {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message {
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    max-width: 70%;
+    margin-bottom: 1rem;
+    word-break: break-word;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.message.own {
+    background: #667eea;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.message.other {
+    background: white;
+    border-left: 4px solid #667eea;
+    margin-right: auto;
+}
+
+.message.system {
+    background: #e9ecef;
+    color: #6c757d;
+    text-align: center;
+    font-style: italic;
+    margin: 0.5rem auto;
+    max-width: 50%;
+    border-radius: 10px;
+}
+
+.message-header {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    margin-top: 0.4rem;
+}
+
+/* Indicateur de frappe */
+.typing-indicator {
+    padding: 0.5rem 1rem;
+    font-style: italic;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Formulaire */
+.message-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    background: white;
+}
+
+#message-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #dee2e6;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#message-input:focus {
+    border-color: #667eea;
+}
+
+.message-form button,
+#emoji-btn {
+    padding: 0.75rem 1rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+
+.message-form button:hover,
+#emoji-btn:hover {
+    background: #5a6fd8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .chat-header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Thème sombre */
+body.dark {
+    background: linear-gradient(135deg, #2c3e50, #4b6cb7);
+    color: #eee;
+}
+
+body.dark .chat-container {
+    background: #1e1e2f;
+}
+
+body.dark .chat-header {
+    background: #4b6cb7;
+}
+
+body.dark .sidebar {
+    background: #2c2f40;
+    border-right: 1px solid #444;
+}
+
+body.dark .sidebar h3,
+body.dark #users-list li {
+    color: #ccc;
+    background: #333;
+    border-left-color: #4b6cb7;
+}
+
+body.dark .messages-container {
+    background: #282c34;
+}
+
+body.dark .message.other {
+    background: #393f4e;
+    color: #ddd;
+}
+
+body.dark .message.own {
+    background: #4b6cb7;
+    color: white;
+}
+
+body.dark .message.system {
+    background: #3a3f4b;
+    color: #aaa;
+}
+
+body.dark .message-form {
+    background: #2c2f3a;
+}
+
+body.dark #message-input {
+    background: #1e1e2f;
+    color: #eee;
+    border-color: #4b6cb7;
+}
+
+body.dark .message-form button,
+body.dark #emoji-btn {
+    background: #4b6cb7;
+}
+
+body.dark #disconnect-btn {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.reaction-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+.reaction-menu {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.reaction-menu.hidden {
+    display: none;
+}
+
+.reaction-menu span {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.reaction-menu span:hover {
+    transform: scale(1.3);
+}
+
+.reaction-bar {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    font-size: 1rem;
+}
