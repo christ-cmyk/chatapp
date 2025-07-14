@@ -11,7 +11,7 @@ const server = http.createServer(app);
 // Configuration de Socket.IO avec le serveur HTTP
 const io = socketIo(server, {
     cors: {
-        origin: "*",
+        origin: "https://chatapp-xchk.onrender.com", // ✅ IMPORTANT pour Render
         methods: ["GET", "POST"]
     }
 });
@@ -82,14 +82,16 @@ io.on('connection', (socket) => {
 
     // 🆕 Réception d'une réaction
     socket.on('react_message', ({ messageId, reaction, username }) => {
-        // Recherche du message dans l'historique
         const msg = messageHistory.find(m => m.id === messageId);
         if (msg) {
-            // Incrémentation ou mise à jour des réactions
             msg.reactions[reaction] = msg.reactions[reaction] ? msg.reactions[reaction] + 1 : 1;
 
-            // Diffusion à tous les clients
-            io.emit('message_reaction', { messageId, reaction, count: msg.reactions[reaction] });
+            io.emit('message_reaction', {
+                messageId,
+                reaction,
+                count: msg.reactions[reaction],
+                username
+            });
         }
     });
 
@@ -133,9 +135,8 @@ io.on('connection', (socket) => {
     });
 });
 
-// Lancement du serveur
-const PORT = process.env.PORT || 3000;
+// Lancement du serveur sur Render
+const PORT = process.env.PORT || 10000; // Parfois Render utilise un autre port
 server.listen(PORT, () => {
     console.log(`Serveur de chat démarré sur le port ${PORT}`);
-    console.log(`Accédez à l'application sur http://localhost:${PORT}`);
 });
