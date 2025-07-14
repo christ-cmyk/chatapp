@@ -75,7 +75,8 @@ function handleLogin(e) {
 }
 
 function initializeSocket() {
-    socket = io();
+    // ✅ Connexion à Render au lieu de localhost
+    socket = io('https://chatapp-xchk.onrender.com');
 
     socket.on('connect', () => {
         socket.emit('user_join', currentUser);
@@ -161,7 +162,6 @@ function displayMessage(data, isNew = false) {
     html += `<div class="message-content">${escapeHtml(data.message)}</div>`;
     html += `<div class="message-time">${data.timestamp}</div>`;
 
-    // Bouton de réaction
     html += `
         <div class="reaction-icon" title="Réagir">❤️</div>
         <div class="reaction-menu hidden">
@@ -177,7 +177,6 @@ function displayMessage(data, isNew = false) {
     messageDiv.innerHTML = html;
     messagesContainer.appendChild(messageDiv);
 
-    // Animation
     if (isNew) {
         messageDiv.style.opacity = '0';
         messageDiv.style.transform = 'translateY(20px) scale(0.95)';
@@ -188,7 +187,6 @@ function displayMessage(data, isNew = false) {
         }, 10);
     }
 
-    // Réactions
     const icon = messageDiv.querySelector('.reaction-icon');
     const menu = messageDiv.querySelector('.reaction-menu');
     const bar = messageDiv.querySelector('.reaction-bar');
@@ -272,6 +270,14 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function showLoginScreen() {
+    chatScreen.classList.add('hidden');
+    loginScreen.classList.remove('hidden');
+    usernameInput.value = '';
+    currentUser = '';
+    usernameInput.focus();
 }
 
 window.addEventListener('error', (e) => console.error('Erreur JS :', e.error));
